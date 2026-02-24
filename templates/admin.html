@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPTV Admin Panel</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        input { padding: 5px; margin: 5px; }
+        button { padding: 6px 10px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        table, th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f4f4f4; }
+        a { color: red; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<h2>IPTV Admin Panel</h2>
+
+<h3>Add New Stream</h3>
+<form method="POST" action="/add">
+    <input type="text" name="name" placeholder="Stream Name" required>
+    <input type="text" name="group" placeholder="Group (e.g. Cricket)" required>
+    <input type="text" name="url" placeholder="Stream URL" required>
+    <button type="submit">Add</button>
+</form>
+
+<h3>Existing Streams</h3>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Action</th>
+    </tr>
+
+    {% for stream in streams %}
+    <tr>
+        <td>{{ stream.id }}</td>
+        <td>{{ stream.name }}</td>
+        <td>{{ stream.group }}</td>
+        <td><a href="/delete/{{ stream.id }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<hr>
+<p><b>Playlist URL:</b> /playlist.m3u</p>
+
+</body>
+</html>
